@@ -30,8 +30,11 @@ public class CPUScheduler {
             System.out.println();
             System.out.print("> Proc arTime: " + proc.get(i).getArTime());
             System.out.println();
+            System.out.print("Current: " + current);
+            System.out.println();
             if(proc.get(current).getArTime() > proc.get(i).getArTime()){
-                //This is not working at all
+                // This is not working at all
+                // Current is always a 0
                 System.out.print("Proc current arTime: " + proc.get(current).getArTime());
                 System.out.println();
                 System.out.print("> Proc arTime: " + proc.get(i).getArTime());
@@ -64,26 +67,33 @@ public class CPUScheduler {
             if(proc.get(current).getBrTime()==0){
                 current = queue.get(0);
             }
-            for(int i = 0;i<proc.size();i++){
-                if(timer==proc.get(i).getArTime()){
+            for(int i = 0; i<proc.size(); i++){
+                if(timer == proc.get(i).getArTime()){
                     queue.add(i);
                 }
             }
             if(timer%quantum==0){
+                // Timer is always a Zero
+                System.out.print("Timer 111: " + timer);
+                System.out.println();
                 if(queue.isEmpty())
-                // error here:
+                    System.out.print("Queue is empty: " + queue.size());
+                System.out.println();
                 System.out.print("Queue Size: " + queue.size());
                 System.out.println();
                 current = queue.get(0);
                 queue.remove(0);
                 queue.add(current);
             }
-            
-
+            // The code that follows does not work at all
+            System.out.print("Timer 222: " + timer);
+            System.out.println();
 
             proc.get(current).changeBrTime();
 
             timer++;
+            System.out.print("Timer 333: " + timer);
+            System.out.println();
 
             
             Integer tempInt = 0;
@@ -96,6 +106,7 @@ public class CPUScheduler {
                 break;
             }
         }
+
         for(int l = 0; l<proc.size();l++){
             proc.get(l).comTime();
         }
